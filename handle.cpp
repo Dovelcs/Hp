@@ -1,87 +1,87 @@
 #include "handle.h"
-using namespace std;
 
+using namespace std;
 /*****************************************************************************
 Copyright: 1988-1999, 520ll Tech. Co., Ltd.
 File name: handle.cpp
-Description: ç”¨äºé€šè¿‡EnumWindowså‡½æ•°éå†æ‰€æœ‰çª—å£ï¼Œè¾“å‡ºçª—å£å¥æŸ„åŠå…¶æ ‡é¢˜
+Description: ÓÃÓÚÍ¨¹ıEnumWindowsº¯Êı±éÀúËùÓĞ´°¿Ú£¬Êä³ö´°¿Ú¾ä±ú¼°Æä±êÌâ
 Author: Dovelcs
 Version: 1.0
 Date: 2024-01-10
 History:
     2024-01-10, Dovelcs
-        - åˆå§‹ç‰ˆæœ¬
+        - ³õÊ¼°æ±¾
 *****************************************************************************/
 
-// å‡½æ•°ï¼šEnumWinhw
-// æè¿°ï¼šé€šè¿‡EnumWindowså‡½æ•°éå†æ‰€æœ‰çª—å£ï¼Œè¾“å‡ºçª—å£å¥æŸ„åŠå…¶æ ‡é¢˜
+// º¯Êı£ºEnumWinhw
+// ÃèÊö£ºÍ¨¹ıEnumWindowsº¯Êı±éÀúËùÓĞ´°¿Ú£¬Êä³ö´°¿Ú¾ä±ú¼°Æä±êÌâ
 void EnumWinhwA(void)
 {
-    // åˆ›å»ºä¸€ä¸ªEnumDataå¯¹è±¡ï¼Œç”¨äºä¼ é€’æ•°æ®ç»™EnumWindowsçš„å›è°ƒå‡½æ•°
+    // ´´½¨Ò»¸öEnumData¶ÔÏó£¬ÓÃÓÚ´«µİÊı¾İ¸øEnumWindowsµÄ»Øµ÷º¯Êı
     EnumData data;
     //SetConsoleOutputCP(CP_ACP);
-    // è°ƒç”¨EnumWindowså‡½æ•°ï¼Œéå†æ‰€æœ‰é¡¶çº§çª—å£
+    // µ÷ÓÃEnumWindowsº¯Êı£¬±éÀúËùÓĞ¶¥¼¶´°¿Ú
     EnumWindows([](HWND hwnd, LPARAM lParam) -> BOOL {
-        // å°†lParamè½¬æ¢ä¸ºEnumDataæŒ‡é’ˆï¼Œä»¥ä¾¿åœ¨å›è°ƒå‡½æ•°ä¸­è®¿é—®ä¼ é€’çš„æ•°æ®
+        // ½«lParam×ª»»ÎªEnumDataÖ¸Õë£¬ÒÔ±ãÔÚ»Øµ÷º¯ÊıÖĞ·ÃÎÊ´«µİµÄÊı¾İ
         EnumData* _data = reinterpret_cast<EnumData*>(lParam);
 
-        // ç”¨äºå­˜å‚¨çª—å£æ ‡é¢˜çš„å­—ç¬¦æ•°ç»„
+        // ÓÃÓÚ´æ´¢´°¿Ú±êÌâµÄ×Ö·ûÊı×é
         char windowTitle[256];
 
-        // è·å–çª—å£æ ‡é¢˜
+        // »ñÈ¡´°¿Ú±êÌâ
         GetWindowTextA(hwnd, windowTitle, sizeof(windowTitle));
 
-        // è¾“å‡ºçª—å£å¥æŸ„å’Œæ ‡é¢˜åˆ°æ ‡å‡†è¾“å‡º
+        // Êä³ö´°¿Ú¾ä±úºÍ±êÌâµ½±ê×¼Êä³ö
         std::cout << hwnd << "\t" << windowTitle << std::endl;
 
-        // è¿”å›TRUEï¼Œä»¥ç»§ç»­æšä¸¾çª—å£
+        // ·µ»ØTRUE£¬ÒÔ¼ÌĞøÃ¶¾Ù´°¿Ú
         return TRUE;
-        }, reinterpret_cast<LPARAM>(&data)); // ä¼ é€’EnumDataå¯¹è±¡çš„æŒ‡é’ˆä½œä¸ºæšä¸¾çª—å£å›è°ƒå‡½æ•°çš„å‚æ•°
+        }, reinterpret_cast<LPARAM>(&data)); // ´«µİEnumData¶ÔÏóµÄÖ¸Õë×÷ÎªÃ¶¾Ù´°¿Ú»Øµ÷º¯ÊıµÄ²ÎÊı
 }
 
 
 /*****************************************************************************
 Copyright: 1988-1999, 520ll Tech. Co., Ltd.
 File name: handle.cpp
-Description: ç”¨äºé€šè¿‡EnumWindowså‡½æ•°éå†æ‰€æœ‰çª—å£ï¼Œè¾“å‡ºçª—å£å¥æŸ„åŠå…¶æ ‡é¢˜ï¼ˆåŒ…å«Unicodeå­—ç¬¦ï¼‰
+Description: ÓÃÓÚÍ¨¹ıEnumWindowsº¯Êı±éÀúËùÓĞ´°¿Ú£¬Êä³ö´°¿Ú¾ä±ú¼°Æä±êÌâ£¨°üº¬Unicode×Ö·û£©
 Author: Dovelcs
 Version: 1.0
 Date: 2024-01-10
 History:
     2024-01-10, Dovelcs
-        - åˆå§‹ç‰ˆæœ¬
+        - ³õÊ¼°æ±¾
 *****************************************************************************/
 
-// å›è°ƒå‡½æ•°ï¼Œç”¨äºå¤„ç†EnumWindowsçš„æ¯ä¸ªçª—å£
+// »Øµ÷º¯Êı£¬ÓÃÓÚ´¦ÀíEnumWindowsµÄÃ¿¸ö´°¿Ú
 BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam)
 {
-    // å°†lParamè½¬æ¢ä¸ºEnumDataæŒ‡é’ˆï¼Œä»¥ä¾¿åœ¨å›è°ƒå‡½æ•°ä¸­è®¿é—®ä¼ é€’çš„æ•°æ®
+    // ½«lParam×ª»»ÎªEnumDataÖ¸Õë£¬ÒÔ±ãÔÚ»Øµ÷º¯ÊıÖĞ·ÃÎÊ´«µİµÄÊı¾İ
     EnumData* _data = reinterpret_cast<EnumData*>(lParam);
 
-    // ç”¨äºå­˜å‚¨çª—å£æ ‡é¢˜çš„å®½å­—ç¬¦æ•°ç»„
+    // ÓÃÓÚ´æ´¢´°¿Ú±êÌâµÄ¿í×Ö·ûÊı×é
     wchar_t windowTitle[256];
 
-    // è·å–çª—å£æ ‡é¢˜
+    // »ñÈ¡´°¿Ú±êÌâ
     GetWindowTextW(hwnd, windowTitle, sizeof(windowTitle) / sizeof(windowTitle[0]));
 
-    // è¾“å‡ºçª—å£å¥æŸ„å’Œæ ‡é¢˜åˆ°å®½å­—ç¬¦æµ
+    // Êä³ö´°¿Ú¾ä±úºÍ±êÌâµ½¿í×Ö·ûÁ÷
     std::wcout << hwnd << L"\t" << windowTitle << std::endl;
 
-    // è¿”å›TRUEï¼Œä»¥ç»§ç»­æšä¸¾çª—å£
+    // ·µ»ØTRUE£¬ÒÔ¼ÌĞøÃ¶¾Ù´°¿Ú
     return TRUE;
 }
 
-// å‡½æ•°ï¼šEnumWinhwW
-// æè¿°ï¼šé€šè¿‡EnumWindowså‡½æ•°éå†æ‰€æœ‰çª—å£ï¼Œè¾“å‡ºçª—å£å¥æŸ„åŠå…¶æ ‡é¢˜ï¼ˆåŒ…å«Unicodeå­—ç¬¦ï¼‰
+// º¯Êı£ºEnumWinhwW
+// ÃèÊö£ºÍ¨¹ıEnumWindowsº¯Êı±éÀúËùÓĞ´°¿Ú£¬Êä³ö´°¿Ú¾ä±ú¼°Æä±êÌâ£¨°üº¬Unicode×Ö·û£©
 void EnumWinhwW(void)
 {
-    // åˆ›å»ºä¸€ä¸ªEnumDataå¯¹è±¡ï¼Œç”¨äºä¼ é€’æ•°æ®ç»™EnumWindowsçš„å›è°ƒå‡½æ•°
+    // ´´½¨Ò»¸öEnumData¶ÔÏó£¬ÓÃÓÚ´«µİÊı¾İ¸øEnumWindowsµÄ»Øµ÷º¯Êı
     EnumData data;
 
-    // è®¾ç½® wcout çš„æœ¬åœ°åŒ–ä¿¡æ¯ä¸ºä¸­æ–‡ï¼ˆç®€ä½“ä¸­æ–‡ï¼‰
+    // ÉèÖÃ wcout µÄ±¾µØ»¯ĞÅÏ¢ÎªÖĞÎÄ£¨¼òÌåÖĞÎÄ£©
     wcout.imbue(locale("zh_CN"));
 
-    // è°ƒç”¨EnumWindowså‡½æ•°ï¼Œéå†æ‰€æœ‰é¡¶çº§çª—å£ï¼Œå°†å›è°ƒå‡½æ•°ä¼ é€’ç»™å®ƒ
+    // µ÷ÓÃEnumWindowsº¯Êı£¬±éÀúËùÓĞ¶¥¼¶´°¿Ú£¬½«»Øµ÷º¯Êı´«µİ¸øËü
     EnumWindows(EnumWindowsProc, reinterpret_cast<LPARAM>(&data));
 }
 
@@ -89,76 +89,103 @@ void EnumWinhwW(void)
 /*****************************************************************************
 Copyright: 1988-1999, 520ll Tech. Co., Ltd.
 File name: handle.cpp
-Description: é€šè¿‡EnumWindowså‡½æ•°éå†æ‰€æœ‰çª—å£ï¼Œç­›é€‰æŒ‡å®šæ ‡é¢˜çš„çª—å£å¹¶è¿”å›å…¶å¥æŸ„åˆ—è¡¨
+Description: Í¨¹ıEnumWindowsº¯Êı±éÀúËùÓĞ´°¿Ú£¬É¸Ñ¡Ö¸¶¨±êÌâµÄ´°¿Ú²¢·µ»ØÆä¾ä±úÁĞ±í
 Author: Dovelcs
 Version: 1.0
 Date: 2024-01-10
 History:
     2024-01-10, Dovelcs
-        - åˆå§‹ç‰ˆæœ¬
+        - ³õÊ¼°æ±¾
 *****************************************************************************/
-// å‡½æ•°ï¼šFindWinByHw
-// æè¿°ï¼šé€šè¿‡EnumWindowså‡½æ•°éå†æ‰€æœ‰çª—å£ï¼Œç­›é€‰æŒ‡å®šæ ‡é¢˜çš„çª—å£å¹¶è¿”å›å…¶å¥æŸ„åˆ—è¡¨
+// º¯Êı£ºFindWinByHw
+// ÃèÊö£ºÍ¨¹ıEnumWindowsº¯Êı±éÀúËùÓĞ´°¿Ú£¬É¸Ñ¡Ö¸¶¨±êÌâµÄ´°¿Ú²¢·µ»ØÆä¾ä±úÁĞ±í
 std::vector<HWND> FindWinByTit(std::string targetTitle)
 {
-	// åˆ›å»ºä¸€ä¸ªEnumDataå¯¹è±¡ï¼Œç”¨äºä¼ é€’æ•°æ®ç»™EnumWindowsçš„å›è°ƒå‡½æ•°
+	// ´´½¨Ò»¸öEnumData¶ÔÏó£¬ÓÃÓÚ´«µİÊı¾İ¸øEnumWindowsµÄ»Øµ÷º¯Êı
 	EnumData data;
 	data.targetTitle = targetTitle;
 
-	// è°ƒç”¨EnumWindowså‡½æ•°ï¼Œéå†æ‰€æœ‰é¡¶çº§çª—å£
+	// µ÷ÓÃEnumWindowsº¯Êı£¬±éÀúËùÓĞ¶¥¼¶´°¿Ú
     EnumWindows([](HWND hwnd, LPARAM lParam) -> BOOL {
-		// å°†lParamè½¬æ¢ä¸ºEnumDataæŒ‡é’ˆï¼Œä»¥ä¾¿åœ¨å›è°ƒå‡½æ•°ä¸­è®¿é—®ä¼ é€’çš„æ•°æ®
+		// ½«lParam×ª»»ÎªEnumDataÖ¸Õë£¬ÒÔ±ãÔÚ»Øµ÷º¯ÊıÖĞ·ÃÎÊ´«µİµÄÊı¾İ
 		EnumData* _data = reinterpret_cast<EnumData*>(lParam);
 
-		// ç”¨äºå­˜å‚¨çª—å£æ ‡é¢˜çš„å­—ç¬¦æ•°ç»„
+		// ÓÃÓÚ´æ´¢´°¿Ú±êÌâµÄ×Ö·ûÊı×é
 		char windowTitle[256];
 
-		// è·å–çª—å£æ ‡é¢˜
+		// »ñÈ¡´°¿Ú±êÌâ
 		GetWindowTextA(hwnd, windowTitle, sizeof(windowTitle));
 
-		// è¾“å‡ºçª—å£å¥æŸ„å’Œæ ‡é¢˜åˆ°æ ‡å‡†è¾“å‡º
+		// Êä³ö´°¿Ú¾ä±úºÍ±êÌâµ½±ê×¼Êä³ö
 		//std::cout << hwnd << "\t" << windowTitle << std::endl;
         if (strcmp(windowTitle, _data->targetTitle.c_str()) == 0)
         {
 			_data->handles.push_back(hwnd);
 		}
 
-		// è¿”å›TRUEï¼Œä»¥ç»§ç»­æšä¸¾çª—å£
+		// ·µ»ØTRUE£¬ÒÔ¼ÌĞøÃ¶¾Ù´°¿Ú
 		return TRUE;
-		}, reinterpret_cast<LPARAM>(&data)); // ä¼ é€’EnumDataå¯¹è±¡çš„æŒ‡é’ˆä½œä¸ºæšä¸¾çª—å£å›è°ƒå‡½æ•°çš„å‚æ•°
+		}, reinterpret_cast<LPARAM>(&data)); // ´«µİEnumData¶ÔÏóµÄÖ¸Õë×÷ÎªÃ¶¾Ù´°¿Ú»Øµ÷º¯ÊıµÄ²ÎÊı
 
 	return data.handles;
 }
 
-// å‡½æ•°ï¼šFindWindowsBySubstring
-// æè¿°ï¼šé€šè¿‡EnumWindowså‡½æ•°éå†æ‰€æœ‰çª—å£ï¼Œç­›é€‰åŒ…å«æŒ‡å®šå­å­—ç¬¦ä¸²çš„çª—å£å¹¶è¿”å›å…¶å¥æŸ„åˆ—è¡¨
+// º¯Êı£ºFindWindowsBySubstring
+// ÃèÊö£ºÍ¨¹ıEnumWindowsº¯Êı±éÀúËùÓĞ´°¿Ú£¬É¸Ñ¡°üº¬Ö¸¶¨×Ó×Ö·û´®µÄ´°¿Ú²¢·µ»ØÆä¾ä±úÁĞ±í
 std::vector<HWND> FindWindowsBySubstring(const std::string& targetSubstring)
 {
-    // åˆ›å»ºä¸€ä¸ªEnumDataå¯¹è±¡ï¼Œç”¨äºä¼ é€’æ•°æ®ç»™EnumWindowsçš„å›è°ƒå‡½æ•°
+    // ´´½¨Ò»¸öEnumData¶ÔÏó£¬ÓÃÓÚ´«µİÊı¾İ¸øEnumWindowsµÄ»Øµ÷º¯Êı
     EnumData data;
     data.targetTitle = targetSubstring;
 
-    // è°ƒç”¨EnumWindowså‡½æ•°ï¼Œéå†æ‰€æœ‰é¡¶çº§çª—å£
+    // µ÷ÓÃEnumWindowsº¯Êı£¬±éÀúËùÓĞ¶¥¼¶´°¿Ú
     EnumWindows([](HWND hwnd, LPARAM lParam) -> BOOL {
-        // å°†lParamè½¬æ¢ä¸ºEnumDataæŒ‡é’ˆï¼Œä»¥ä¾¿åœ¨å›è°ƒå‡½æ•°ä¸­è®¿é—®ä¼ é€’çš„æ•°æ®
+        // ½«lParam×ª»»ÎªEnumDataÖ¸Õë£¬ÒÔ±ãÔÚ»Øµ÷º¯ÊıÖĞ·ÃÎÊ´«µİµÄÊı¾İ
         EnumData* _data = reinterpret_cast<EnumData*>(lParam);
 
-        // ç”¨äºå­˜å‚¨çª—å£æ ‡é¢˜çš„å­—ç¬¦æ•°ç»„
+        // ÓÃÓÚ´æ´¢´°¿Ú±êÌâµÄ×Ö·ûÊı×é
         char windowTitle[256];
 
-        // è·å–çª—å£æ ‡é¢˜
+        // »ñÈ¡´°¿Ú±êÌâ
         GetWindowTextA(hwnd, windowTitle, sizeof(windowTitle));
 
-        // ä½¿ç”¨ std::string çš„ find å‡½æ•°æ£€æŸ¥çª—å£æ ‡é¢˜æ˜¯å¦åŒ…å«ç›®æ ‡å­å­—ç¬¦ä¸²
+        // Ê¹ÓÃ std::string µÄ find º¯Êı¼ì²é´°¿Ú±êÌâÊÇ·ñ°üº¬Ä¿±ê×Ó×Ö·û´®
         if (std::string(windowTitle).find(_data->targetTitle) != std::string::npos)
         {
+            //std::cout << hwnd << "\t" << windowTitle << std::endl;
             _data->handles.push_back(hwnd);
         }
 
-        // è¿”å›TRUEï¼Œä»¥ç»§ç»­æšä¸¾çª—å£
+        // ·µ»ØTRUE£¬ÒÔ¼ÌĞøÃ¶¾Ù´°¿Ú
         return TRUE;
-        }, reinterpret_cast<LPARAM>(&data)); // ä¼ é€’EnumDataå¯¹è±¡çš„æŒ‡é’ˆä½œä¸ºæšä¸¾çª—å£å›è°ƒå‡½æ•°çš„å‚æ•°
+        }, reinterpret_cast<LPARAM>(&data)); // ´«µİEnumData¶ÔÏóµÄÖ¸Õë×÷ÎªÃ¶¾Ù´°¿Ú»Øµ÷º¯ÊıµÄ²ÎÊı
 
-    // è¿”å›ç¬¦åˆæ¡ä»¶çš„çª—å£å¥æŸ„åˆ—è¡¨
+    // ·µ»Ø·ûºÏÌõ¼şµÄ´°¿Ú¾ä±úÁĞ±í
     return data.handles;
+}
+
+BOOL CALLBACK EnumChildProc(HWND hwndChild, LPARAM lParam) {
+    std::vector<HWND>* childHwnds = reinterpret_cast<std::vector<HWND>*>(lParam);
+    childHwnds->push_back(hwndChild);
+    return TRUE; // ·µ»Ø TRUE ÒÔ¼ÌĞøÃ¶¾ÙÏÂÒ»¸ö×Ó´°¿Ú
+}
+
+
+BOOL CALLBACK EnumChildProc2(HWND hwndChild, LPARAM lParam) {
+    std::unordered_map<std::string, HWND>* mpHD = reinterpret_cast<std::unordered_map<std::string, HWND>*>(lParam);
+
+    // »ñÈ¡×Ó´°¿ÚµÄ±êÌâÎÄ±¾
+    const int bufferSize = 256;
+    char buffer[bufferSize];
+    GetWindowTextA(hwndChild, buffer, bufferSize);
+
+    // Ê¹ÓÃ±êÌâÎÄ±¾×÷Îª¼ü£¬½«×Ó´°¿Ú¾ä±ú´æ´¢µ½unordered_mapÖĞ
+    //std::cout<< buffer << std::endl;
+    (*mpHD)[buffer] = hwndChild;
+
+    return TRUE; // ·µ»Ø TRUE ÒÔ¼ÌĞøÃ¶¾ÙÏÂÒ»¸ö×Ó´°¿Ú
+}
+
+void getHwndsMap(HWND hwnd, std::unordered_map<std::string, HWND>& mpHD) {
+    EnumChildWindows(hwnd, EnumChildProc2, reinterpret_cast<LPARAM>(&mpHD));
 }

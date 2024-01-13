@@ -4,23 +4,18 @@
 #include <vector>
 #include <windows.h>
 #include <iostream> 
-
-
-#define ISVISIABLE(hwnd) ((GetWindowLong(hwnd, GWL_STYLE) & WS_VISIBLE) == WS_VISIBLE) //åˆ¤æ–­çª—å£æ˜¯å¦å¯è§
+#include <unordered_map>
 
 struct EnumData {
     std::string targetTitle;
     std::vector<HWND> handles;
 };
 
-
-extern void EnumWinhwA(void);                                   //é€šè¿‡EnumWindowså‡½æ•°éå†æ‰€æœ‰çª—å£ï¼Œè¾“å‡ºçª—å£å¥æŸ„åŠå…¶æ ‡é¢˜ï¼Œæšä¸¾ä»¥çª„å­—ç¬¦å½¢å¼è¾“å‡º 
-extern void EnumWinhwW(void);           //é€šè¿‡EnumWindowså‡½æ•°éå†æ‰€æœ‰çª—å£ï¼Œè¾“å‡ºçª—å£å¥æŸ„åŠå…¶æ ‡é¢˜ï¼ˆåŒ…å«Unicodeå­—ç¬¦ï¼Œæšä¸¾ä»¥å®½å­—ç¬¦å½¢å¼è¾“å‡º     
-extern std::vector<HWND> FindWinByTit(std::string targetTitle);   //é€šè¿‡EnumWindowså‡½æ•°éå†æ‰€æœ‰çª—å£ï¼Œç­›é€‰æŒ‡å®šæ ‡é¢˜çš„çª—å£å¹¶è¿”å›å…¶å¥æŸ„åˆ—è¡¨ï¼Œå®Œå…¨åŒ¹é…
-extern std::vector<HWND> FindWindowsBySubstring(const std::string& targetSubstring); //é€šè¿‡EnumWindowså‡½æ•°éå†æ‰€æœ‰çª—å£ï¼Œç­›é€‰åŒ…å«æŒ‡å®šå­å­—ç¬¦ä¸²çš„çª—å£å¹¶è¿”å›å…¶å¥æŸ„åˆ—è¡¨ï¼Œéƒ¨åˆ†åŒ¹é…
-
-
-
-
+extern void EnumWinhwA(void);            //Í¨¹ıEnumWindowsº¯Êı±éÀúËùÓĞ´°¿Ú£¬Êä³ö´°¿Ú¾ä±ú¼°Æä±êÌâ£¬Ã¶¾ÙÒÔÕ­×Ö·ûĞÎÊ½Êä³ö 
+extern void EnumWinhwW(void);           //Í¨¹ıEnumWindowsº¯Êı±éÀúËùÓĞ´°¿Ú£¬Êä³ö´°¿Ú¾ä±ú¼°Æä±êÌâ£¨°üº¬Unicode×Ö·û£¬Ã¶¾ÙÒÔ¿í×Ö·ûĞÎÊ½Êä³ö     
+extern std::vector<HWND> FindWinByTit(std::string targetTitle);   //Í¨¹ıEnumWindowsº¯Êı±éÀúËùÓĞ´°¿Ú£¬É¸Ñ¡Ö¸¶¨±êÌâµÄ´°¿Ú²¢·µ»ØÆä¾ä±úÁĞ±í£¬ÍêÈ«Æ¥Åä
+extern std::vector<HWND> FindWindowsBySubstring(const std::string& targetSubstring); //Í¨¹ıEnumWindowsº¯Êı±éÀúËùÓĞ´°¿Ú£¬É¸Ñ¡°üº¬Ö¸¶¨×Ó×Ö·û´®µÄ´°¿Ú²¢·µ»ØÆä¾ä±úÁĞ±í£¬²¿·ÖÆ¥Åä
+extern BOOL CALLBACK EnumChildProc(HWND hwndChild, LPARAM lParam); //Ã¶¾Ù×Ó´°¿Ú»Øµ÷º¯Êı
+extern void getHwndsMap(HWND hwnd, std::unordered_map<std::string, HWND>& mpHD); //»ñÈ¡´°¿Ú¾ä±úÊ÷
 
 #endif // __HANDLE_H__
